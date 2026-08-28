@@ -24,7 +24,7 @@ export default function Experience() {
               className="relative"
             >
               {/* Dot marker, offset to sit on top of the vertical line */}
-              <div className="absolute -left-[2.55rem] flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-accent shadow-sm">
+              <div className="absolute left-[-2.55rem] flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-accent shadow-sm">
                 <Icon size={16} />
               </div>
 
