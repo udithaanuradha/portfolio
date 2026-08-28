@@ -23,13 +23,21 @@ export default function About() {
             interesting projects.
           </p>
           <p>
-            Replace this paragraph with your own story — what got you into
-            programming, what you&apos;re studying, and what kind of roles or
-            projects you&apos;re looking for next.
+            I got into programming by tinkering with small scripts to
+            automate boring tasks, which turned into building full
+            applications end-to-end. These days I split my time between
+            coursework at Moratuwa and personal projects where I get to make
+            my own architecture decisions — from database design to
+            deployment.
+          </p>
+          <p>
+            I&apos;m looking for internship or junior developer roles where I
+            can keep working across the stack and learn from experienced
+            engineers.
           </p>
         </div>
 
-        <div className="rounded-2xl border border-border bg-card p-6">
+        <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
           <h3 className="mb-4 text-sm font-semibold text-foreground">Quick facts</h3>
           <ul className="space-y-3 text-sm text-muted">
             <li>

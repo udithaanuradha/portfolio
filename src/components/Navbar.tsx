@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Download, Menu, X } from "lucide-react";
 import { profile } from "@/data/portfolio";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
   { href: "#skills", label: "Skills" },
   { href: "#awards", label: "Awards" },
@@ -21,11 +23,12 @@ export default function Navbar() {
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 border-b border-border/80 bg-background/80 backdrop-blur"
+      className="sticky top-0 z-50 border-b border-border/80 bg-background/80 shadow-sm backdrop-blur"
     >
       <nav className="section-container flex items-center justify-between py-4">
-        <a href="#top" className="font-mono text-sm font-semibold tracking-tight">
-          {profile.name.split(" ")[0].toLowerCase()}<span className="text-accent">.dev</span>
+        <a href="#top" className="font-heading text-lg font-semibold">
+          {profile.name.split(" ")[0]}
+          <span className="text-accent">.</span>
         </a>
 
         <ul className="hidden gap-8 text-sm text-muted md:flex">
@@ -38,13 +41,27 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <button
-          onClick={() => setOpen((v) => !v)}
-          className="text-foreground md:hidden"
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex items-center gap-3">
+          {/* Resume opens in a new tab so people don't lose their place on the page */}
+          <a
+            href={profile.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-1.5 rounded-lg border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-accent hover:text-accent md:flex"
+          >
+            <Download size={14} /> Resume
+          </a>
+
+          <ThemeToggle />
+
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="text-foreground md:hidden"
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </nav>
 
       {open && (
@@ -65,6 +82,16 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+          <li>
+            <a
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 transition-colors hover:text-foreground"
+            >
+              <Download size={14} /> Resume
+            </a>
+          </li>
         </motion.ul>
       )}
     </motion.header>

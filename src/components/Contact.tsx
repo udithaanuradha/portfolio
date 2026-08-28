@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
-import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { profile } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
 
@@ -16,7 +16,7 @@ export default function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="rounded-2xl border border-border bg-card p-8"
+        className="rounded-xl border border-border bg-card p-8 shadow-sm"
       >
         <p className="mb-6 max-w-lg text-muted">
           I&apos;m open to internships, entry-level roles, and interesting
@@ -30,27 +30,21 @@ export default function Contact() {
         <div className="flex flex-wrap gap-4">
           <a
             href={`mailto:${profile.email}`}
-            className="flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+            className="flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white shadow-sm transition-all hover:opacity-90 hover:shadow-md"
           >
             <Mail size={16} /> {profile.email}
           </a>
           <a
             href={profile.socials.github}
-            className="flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+            className="flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
           >
             <FaGithub size={16} /> GitHub
           </a>
           <a
             href={profile.socials.linkedin}
-            className="flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+            className="flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
           >
             <FaLinkedin size={16} /> LinkedIn
-          </a>
-          <a
-            href={profile.socials.twitter}
-            className="flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
-          >
-            <FaXTwitter size={16} /> Twitter
           </a>
         </div>
       </motion.div>

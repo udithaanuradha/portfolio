@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { projects } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
@@ -19,17 +20,29 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            whileHover={{ y: -4 }}
-            className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 transition-colors hover:border-accent/60"
+            whileHover={{ y: -2 }}
+            className="flex flex-col justify-between rounded-xl border border-border bg-card p-6 shadow-sm transition-all hover:border-accent/60 hover:shadow-md"
           >
             <div>
-              <h3 className="mb-2 text-lg font-semibold">{project.title}</h3>
+              <h3 className="mb-2 text-lg font-semibold">
+                {/* If a case study exists, the title itself links to it */}
+                {project.caseStudy ? (
+                  <Link
+                    href={`/projects/${project.caseStudy.slug}`}
+                    className="hover:text-accent"
+                  >
+                    {project.title}
+                  </Link>
+                ) : (
+                  project.title
+                )}
+              </h3>
               <p className="mb-4 text-sm text-muted">{project.description}</p>
               <div className="mb-6 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-border px-3 py-1 font-mono text-xs text-muted"
+                    className="rounded-md border border-border px-3 py-1 font-mono text-xs text-muted"
                   >
                     {tag}
                   </span>
@@ -37,7 +50,15 @@ export default function Projects() {
               </div>
             </div>
 
-            <div className="flex gap-4 text-sm">
+            <div className="flex flex-wrap gap-4 text-sm">
+              {project.caseStudy && (
+                <Link
+                  href={`/projects/${project.caseStudy.slug}`}
+                  className="flex items-center gap-1.5 font-medium text-accent hover:opacity-80"
+                >
+                  Case study <ArrowRight size={16} />
+                </Link>
+              )}
               {project.githubUrl && (
                 <a
                   href={project.githubUrl}

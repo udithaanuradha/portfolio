@@ -1,12 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --accent: #6366f1;
-  --muted: #a1a1aa;
-  --border: #27272a;
-  --card: #111113;
+  /* Light theme — the default when no preference is stored (see ThemeToggle).
+     A cool slate-navy neutral scale paired with a deep, muted navy accent —
+     restrained on purpose, instead of a bright startup-purple. Background is
+     a hair off pure white (less clinical/harsh), muted text is darker than
+     a typical "gray-500" so body copy still reads with authority, and card
+     surfaces sit far enough from the page background to look properly
+     elevated rather than blending flat into it. */
+  --background: #fbfbfd;
+  --foreground: #0f172a;
+  --accent: #1e3a5f;
+  --muted: #475569;
+  --border: #dde1e8;
+  --card: #f3f5f8;
+}
+
+/* No stored choice yet: follow the OS/browser preference. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0a0e14;
+    --foreground: #edf0f4;
+    --accent: #7ea6d8;
+    --muted: #99a3b3;
+    --border: #232a36;
+    --card: #10151f;
+  }
+}
+
+/* Explicit choice, set via ThemeToggle, always wins over the OS preference. */
+:root[data-theme="dark"] {
+  --background: #0a0e14;
+  --foreground: #edf0f4;
+  --accent: #7ea6d8;
+  --muted: #99a3b3;
+  --border: #232a36;
+  --card: #10151f;
 }
 
 @theme inline {
@@ -16,8 +45,9 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-card: var(--card);
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-heading: var(--font-lora), Georgia, "Times New Roman", serif;
   --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas,
     "Liberation Mono", monospace;
 }
@@ -26,11 +56,15 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 ::selection {
   background: var(--accent);
-  color: #fff;
+  /* Swaps with the theme so contrast holds in both directions: near-black
+     text on the light-blue dark-mode accent, white text on the navy
+     light-mode accent. */
+  color: var(--background);
 }
 
 .section-container {
