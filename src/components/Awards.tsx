@@ -8,7 +8,7 @@ import SectionHeading from "./SectionHeading";
 export default function Awards() {
   return (
     <section id="awards" className="section-container py-24">
-      <SectionHeading eyebrow="Recognition" title="Awards & achievements" />
+      <SectionHeading eyebrow="Credentials" title="Certifications" />
 
       <div className="space-y-4">
         {awards.map((award, i) => (

@@ -149,7 +149,7 @@ export const experience: TimelineItem[] = [
     title: "BSc (Hons) in Information Technology and Management",
     organization: "University of Moratuwa",
     period: "2023 — Present",
-    description: "Cumulative GPA: 3.49",
+    description: "Cumulative GPA: 3.45",
   },
   {
     type: "education",
@@ -228,3 +228,39 @@ export const awards: Award[] = [
     // certificateUrl: "/certificates/diploma-in-english.jpg",
   },
 ];
+
+export type Article = {
+  title: string;
+  slug: string;
+  description: string;
+  content: string; // The full article content, can be HTML or plain text
+  url?: string;
+  platform: "Medium" | "LinkedIn";
+  date: string;
+  imageUrl?: string; // Optional thumbnail image
+};
+
+export const articles: Article[] = [
+  {
+    title: "Understanding React Server Components",
+    slug: "understanding-react-server-components",
+    description: "A deep dive into how Server Components change the way we build React applications.",
+    content: "React Server Components are a new addition to the React ecosystem that allow you to render components on the server, reducing the amount of JavaScript sent to the client. This means faster load times, better SEO, and a more seamless user experience. In this article, I explore the fundamental concepts, how they differ from SSR, and practical examples of implementing them in a Next.js 14 application...",
+    platform: "Medium",
+    date: "Oct 12, 2023",
+    imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    title: "My Journey into Full-Stack Development",
+    slug: "my-journey-into-full-stack",
+    description: "Sharing the lessons I learned transitioning from hardware projects to full-stack web development.",
+    content: "Coming from a background in hardware and IoT, transitioning into full-stack web development was both exciting and challenging. Learning to manage the entire lifecycle of an application—from designing the database schema to deploying the frontend—required a shift in mindset. Here are the top 5 lessons I learned along the way, including why understanding the complete architecture makes you a better developer...",
+    platform: "LinkedIn",
+    date: "Sep 28, 2023",
+    imageUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800",
+  }
+];
+
+export function getArticleBySlug(slug: string): Article | undefined {
+  return articles.find((article) => article.slug === slug);
+}

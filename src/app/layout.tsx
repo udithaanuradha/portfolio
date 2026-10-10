@@ -1,28 +1,29 @@
 import type { Metadata } from "next";
-import { Inter, Lora } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/data/portfolio";
 import IntroLoader from "@/components/IntroLoader";
 import SpaceBackground from "@/components/SpaceBackground";
+import CustomCursor from "@/components/CustomCursor";
 
-// Inter for body text, Lora (serif) for headings — a deliberate pairing for
-// a more refined, editorial feel than the default system-font stack. Exposed
-// as CSS variables and wired into --font-sans / --font-heading in globals.css.
+// Inter for body text, Outfit for headings — a sleek, modern pairing for
+// a high-tech, premium feel. Exposed as CSS variables and wired into 
+// --font-sans / --font-heading in globals.css.
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
 });
-const lora = Lora({
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-lora",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-outfit",
   display: "swap",
 });
 
 // TODO: swap this for your real domain once you deploy — it's what Next.js
 // uses to turn the relative /opengraph-image into a full, shareable URL.
-const siteUrl = "https://example.com";
+const siteUrl = "https://udithaanuradha.com"; // Placeholder updated
 
 const title = `${profile.name} — ${profile.role}`;
 const description = `Portfolio of ${profile.name}, ${profile.role.toLowerCase()} showcasing projects, skills, and achievements.`;
@@ -52,7 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`h-full antialiased ${inter.variable} ${lora.variable}`}
+      className={`h-full antialiased ${inter.variable} ${outfit.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="min-h-full flex flex-col relative bg-transparent">
+        <CustomCursor />
         <SpaceBackground />
         <IntroLoader />
         {children}

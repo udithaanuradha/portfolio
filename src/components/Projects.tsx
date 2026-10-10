@@ -6,13 +6,14 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { projects } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
+import Carousel from "./Carousel";
 
 export default function Projects() {
   return (
     <section id="projects" className="section-container py-24">
       <SectionHeading eyebrow="Projects" title="Things I've built" />
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <Carousel>
         {projects.map((project, i) => (
           <motion.div
             key={project.title}
@@ -20,8 +21,8 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            whileHover={{ y: -2 }}
-            className="flex flex-col justify-between rounded-xl border border-border bg-card p-6 shadow-sm transition-all hover:border-accent/60 hover:shadow-md"
+            whileHover={{ y: -4, scale: 1.01 }}
+            className="flex flex-col justify-between rounded-xl border border-border/50 bg-card/40 backdrop-blur-md p-6 shadow-sm transition-all hover:border-primary/50 hover:shadow-primary/20 hover:shadow-xl hover:bg-card/60 h-full"
           >
             <div>
               <h3 className="mb-2 text-lg font-semibold">
@@ -78,7 +79,7 @@ export default function Projects() {
             </div>
           </motion.div>
         ))}
-      </div>
+      </Carousel>
     </section>
   );
 }
