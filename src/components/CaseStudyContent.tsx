@@ -92,6 +92,29 @@ export default function CaseStudyContent({ project }: { project: Project }) {
       </motion.div>
 
       <div className="space-y-6">
+        {caseStudy.videoUrl && (
+          <Section label="Project Demo">
+            <div className="aspect-video w-full overflow-hidden rounded-lg border border-border">
+              {caseStudy.videoUrl.includes("youtube.com") || caseStudy.videoUrl.includes("youtu.be") ? (
+                <iframe
+                  className="h-full w-full"
+                  src={caseStudy.videoUrl}
+                  title="Project Demo Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <video
+                  className="h-full w-full object-cover"
+                  controls
+                  src={caseStudy.videoUrl}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              )}
+            </div>
+          </Section>
+        )}
         <Section label="Overview">
           <p>{caseStudy.overview}</p>
         </Section>

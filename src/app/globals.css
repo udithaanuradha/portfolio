@@ -1,46 +1,45 @@
 @import "tailwindcss";
 
 :root {
-  /* Light theme — the default when no preference is stored (see ThemeToggle).
-     A cool slate-navy neutral scale paired with a deep, muted navy accent —
-     restrained on purpose, instead of a bright startup-purple. Background is
-     a hair off pure white (less clinical/harsh), muted text is darker than
-     a typical "gray-500" so body copy still reads with authority, and card
-     surfaces sit far enough from the page background to look properly
-     elevated rather than blending flat into it. */
-  --background: #fbfbfd;
-  --foreground: #0f172a;
-  --accent: #1e3a5f;
+  /* Default Theme: Deep Space Dark (Matching target portfolio aesthetic) */
+  --background: #030712; /* Very dark slate */
+  --foreground: #f8fafc; /* Crisp white */
+  --primary: #8b5cf6; /* Vibrant Purple */
+  --primary-foreground: #ffffff;
+  --accent: #3b82f6; /* Vibrant Blue */
+  --muted: #94a3b8;
+  --border: rgba(255, 255, 255, 0.1);
+  --card: rgba(15, 23, 42, 0.6); /* Translucent slate-900 */
+}
+
+/* Optional Light Theme */
+:root[data-theme="light"] {
+  --background: #EEF2FF;
+  --foreground: #0F172A;
+  --primary: #4F46E5;
+  --primary-foreground: #FFFFFF;
+  --accent: #4F46E5;
   --muted: #475569;
-  --border: #dde1e8;
-  --card: #f3f5f8;
+  --border: rgba(99, 102, 241, 0.15); /* Subtle indigo border */
+  --card: rgba(255, 255, 255, 0.7); /* Translucent white for glass effect */
 }
 
-/* No stored choice yet: follow the OS/browser preference. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --background: #0a0e14;
-    --foreground: #edf0f4;
-    --accent: #7ea6d8;
-    --muted: #99a3b3;
-    --border: #232a36;
-    --card: #10151f;
-  }
-}
-
-/* Explicit choice, set via ThemeToggle, always wins over the OS preference. */
 :root[data-theme="dark"] {
-  --background: #0a0e14;
-  --foreground: #edf0f4;
-  --accent: #7ea6d8;
-  --muted: #99a3b3;
-  --border: #232a36;
-  --card: #10151f;
+  --background: #030712;
+  --foreground: #f8fafc;
+  --primary: #8b5cf6;
+  --primary-foreground: #ffffff;
+  --accent: #3b82f6;
+  --muted: #94a3b8;
+  --border: rgba(255, 255, 255, 0.1);
+  --card: rgba(15, 23, 42, 0.6);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-border: var(--border);

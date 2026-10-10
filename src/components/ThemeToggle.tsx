@@ -19,18 +19,18 @@ function getSystemTheme(): Theme {
 }
 
 export default function ThemeToggle() {
-  // Matches whatever the inline script in layout.tsx already applied to <html>,
-  // so there's no mismatch between this button's icon and the actual theme.
-  const [theme, setTheme] = useState<Theme>(
-    () => getStoredTheme() ?? getSystemTheme()
-  );
+  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState<Theme>("dark");
 
-  // React's Strict Mode remounts on every dev load, which clears the
-  // data-theme attribute the inline script set. Re-apply it here so dev
-  // stays in sync with prod (see the Next.js "preventing flash" guide).
   useLayoutEffect(() => {
+    setMounted(true);
     const stored = getStoredTheme();
-    if (stored) document.documentElement.setAttribute("data-theme", stored);
+    if (stored) {
+      setTheme(stored);
+      document.documentElement.setAttribute("data-theme", stored);
+    } else {
+      setTheme(getSystemTheme());
+    }
   }, []);
 
   function toggle() {
@@ -38,6 +38,18 @@ export default function ThemeToggle() {
     setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
     window.localStorage.setItem("theme", next);
+  }
+
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent hover:text-accent"
+        aria-label="Toggle theme"
+      >
+        <span className="h-4 w-4" />
+      </button>
+    );
   }
 
   return (

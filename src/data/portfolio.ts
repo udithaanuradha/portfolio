@@ -20,6 +20,7 @@ export const profile = {
     github: "https://github.com/udithaanuradha",
     linkedin: "https://www.linkedin.com/in/uditha-anuradha-a220372a3/",
   },
+  focus: "Full-Stack Application Development, Web & Smart Enterprise Applications",
 };
 
 // Optional deep-dive content for a project. When present, the project card
@@ -29,6 +30,7 @@ export type CaseStudy = {
   status: string; // e.g. "Completed", "In progress"
   overview: string; // the fuller story — what it is, who it's for, how it was built
   keyContributions: string[]; // bulleted list of what YOU specifically did
+  videoUrl?: string; // URL for an embedded introduction video (e.g., YouTube embed URL or direct .mp4)
 };
 
 export type Project = {
@@ -49,18 +51,20 @@ export const projects: Project[] = [
     description:
       "A full-stack platform built for the Faculty of IT at University of Moratuwa to manage undergraduate project work end-to-end — group formation, supervisor approval, milestones, and evaluation.",
     tags: ["React", "TypeScript", "Node.js", "Express", "MySQL", "Socket.IO", "Redis"],
-    githubUrl: "https://github.com/YOUR-USERNAME/edusync",
+    githubUrl: "https://github.com/udithaanuradha/edusync",
     caseStudy: {
       slug: "edusync",
       status: "Completed",
       overview:
-        "A full-stack web platform built for the Faculty of Information Technology, University of Moratuwa, to manage undergraduate project work across all four years of the degree program, end-to-end — group formation, supervisor assignment and approval, milestone/stage tracking, meeting scheduling, submissions, marking and evaluation — across student, supervisor, coordinator, and admin roles. Developed as a real client engagement for the faculty rather than a hypothetical brief, with requirements gathered directly from academic staff (coordinators and supervisors) and students through consultation sessions before implementation began.",
+        "A full-stack web platform built for the Faculty of Information Technology, University of Moratuwa, to manage undergraduate project work across all four years of the degree program. Developed as a real client engagement, the system streamlines the academic lifecycle with 5 distinct role-based portals (Students, Supervisors, Coordinators, Mentors, Admins). Key platform features include automated group formation and approval workflows, interactive Kanban boards with real-time database sync, dynamic milestone tracking, an E-Calendar for virtual panel scheduling (Zoom integration), and a real-time messaging system via WebSockets.",
       keyContributions: [
-        "Built the student-facing module: dashboard, group formation, and marks/evaluation views.",
-        "Implemented a dual-supervisor approval workflow.",
-        "Built Gantt/Kanban-style milestone tracking.",
-        "Added real-time updates using Socket.IO and Redis.",
+        "Built the comprehensive student portal providing a live overview of project progress, active task counts, and real-time announcement feeds.",
+        "Developed the group creation workflow, enabling students to search/invite peers by academic level, and seamlessly submit approval requests to supervisors.",
+        "Implemented the interactive drag-and-drop Kanban board for students to break down milestones, define individual scope, and track task statuses.",
+        "Integrated the file submission portal (Cloudinary) allowing students to upload required project documents directly to their tasks/milestones.",
+        "Created the progress tracking view that calculates and displays team velocity, completed deliverables, and individual contributions in real time.",
       ],
+
     },
   },
   {
@@ -68,7 +72,7 @@ export const projects: Project[] = [
     description:
       "A healthcare management system to digitize patient records, appointment scheduling, and prescription tracking for clinics.",
     tags: ["Spring Boot", "Java", "SQL", "REST APIs"],
-    githubUrl: "https://github.com/YOUR-USERNAME/smart-medicare-system",
+    githubUrl: "https://github.com/udithaanuradha/smart-medicare-system",
     caseStudy: {
       slug: "smart-medicare-system",
       status: "Completed",
@@ -86,7 +90,7 @@ export const projects: Project[] = [
     description:
       "A full-stack platform for organizations to manage events, attendees, and live QR-code check-ins, spanning a Next.js web app and a React Native mobile app.",
     tags: ["Next.js", "React", "TypeScript", "React Native", "Expo", "PostgreSQL", "Prisma", "JWT"],
-    githubUrl: "https://github.com/YOUR-USERNAME/eventpro",
+    githubUrl: "https://github.com/udithaanuradha/eventpro",
     caseStudy: {
       slug: "eventpro",
       status: "Completed",
@@ -106,7 +110,7 @@ export const projects: Project[] = [
     description:
       "An IoT-powered system that monitors temperature, humidity, air quality, and dust levels in real time to protect jewellery artifacts, with an auto-updating web dashboard.",
     tags: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "MySQL", "Firebase", "IoT Sensors & Actuators"],
-    githubUrl: "https://github.com/YOUR-USERNAME/pureguard",
+    githubUrl: "https://github.com/udithaanuradha/pureguard",
     caseStudy: {
       slug: "pureguard",
       status: "Completed (first-year hardware/IoT project)",
@@ -154,11 +158,10 @@ export const experience: TimelineItem[] = [
     period: "2023",
   },
   {
-    // TODO: fill in the actual start/end years.
     type: "education",
     title: "G.C.E. Advanced Level, Mathematics Stream",
     organization: "Bandarawela Central College",
-    period: "[Start Year] — [End Year]",
+    period: "2019 — 2021",
   },
 ];
 
@@ -174,6 +177,33 @@ export const skills: string[] = [
   "C++",
   "SQL",
   "Git & GitHub",
+];
+
+export const categorizedSkills = [
+  {
+    category: "Languages",
+    items: ["JavaScript", "TypeScript", "C", "C++", "Java"]
+  },
+  {
+    category: "Web and Mobile",
+    items: ["React", "Angular", "Next.js", "Tailwind CSS", "HTML/CSS"]
+  },
+  {
+    category: "Back-End and APIs",
+    items: ["Node.js", "Express.js", "Spring Boot"]
+  },
+  {
+    category: "Databases and ORMs",
+    items: ["MySQL", "MongoDB", "SQL", "Prisma"]
+  },
+  {
+    category: "DevOps and Cloud",
+    items: ["Git", "GitHub", "Docker", "Vercel"]
+  },
+  {
+    category: "Tools",
+    items: ["Postman", "Figma", "Canva"]
+  }
 ];
 
 export type Award = {

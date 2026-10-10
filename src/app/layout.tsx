@@ -3,7 +3,7 @@ import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/data/portfolio";
 import IntroLoader from "@/components/IntroLoader";
-import { InlineScript } from "@/components/InlineScript";
+import SpaceBackground from "@/components/SpaceBackground";
 
 // Inter for body text, Lora (serif) for headings — a deliberate pairing for
 // a more refined, editorial feel than the default system-font stack. Exposed
@@ -56,12 +56,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <head>
-        {/* Apply any saved theme choice before first paint, so there's no light/dark flash. See ThemeToggle.tsx. */}
-        <InlineScript
-          html={`(function(){try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`}
+        {/* Apply any saved theme choice before first paint, so there's no light/dark flash. */}
+        <script
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`,
+          }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col relative bg-transparent">
+        <SpaceBackground />
         <IntroLoader />
         {children}
       </body>

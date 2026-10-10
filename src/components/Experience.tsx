@@ -37,7 +37,7 @@ export default function Experience() {
                 {item.location && ` · ${item.location}`}
               </p>
               {item.description && (
-                <p className="mt-1 text-sm text-muted">{item.description}</p>
+                <p className="mt-2 text-sm text-muted whitespace-pre-line leading-relaxed">{item.description}</p>
               )}
             </motion.div>
           );

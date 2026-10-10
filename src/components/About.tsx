@@ -37,22 +37,17 @@ export default function About() {
           </p>
         </div>
 
-        <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <h3 className="mb-4 text-sm font-semibold text-foreground">Quick facts</h3>
-          <ul className="space-y-3 text-sm text-muted">
-            <li>
-              <span className="text-foreground">Role:</span> {profile.role}
+        <div className="rounded-xl border border-border/40 bg-card/40 backdrop-blur-md p-6 shadow-sm hover:bg-card/60 hover:border-border transition-all duration-300">
+          <h3 className="mb-4 text-sm font-semibold text-foreground tracking-wide uppercase">Quick facts</h3>
+          <ul className="space-y-4 text-sm text-muted-foreground">
+            <li className="flex flex-col gap-1">
+              <span className="text-foreground font-medium">Role:</span> {profile.role}
             </li>
-            <li>
-              <span className="text-foreground">Location:</span> {profile.location}
+            <li className="flex flex-col gap-1">
+              <span className="text-foreground font-medium">Location:</span> {profile.location}
             </li>
-            <li>
-              <span className="text-foreground">Focus:</span> Full-stack web
-              development
-            </li>
-            <li>
-              <span className="text-foreground">Currently learning:</span> add
-              something here
+            <li className="flex flex-col gap-1">
+              <span className="text-foreground font-medium">Focus:</span> {profile.focus}
             </li>
           </ul>
         </div>
