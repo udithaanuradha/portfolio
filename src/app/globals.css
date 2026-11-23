@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
 :root {
   /* Default Theme: Deep Space Dark (Matching target portfolio aesthetic) */
   --background: #030712; /* Very dark slate */
@@ -14,14 +16,14 @@
 
 /* Optional Light Theme */
 :root[data-theme="light"] {
-  --background: #EEF2FF;
-  --foreground: #0F172A;
-  --primary: #4F46E5;
-  --primary-foreground: #FFFFFF;
-  --accent: #4F46E5;
+  --background: #f6f8fc;
+  --foreground: #0f172a;
+  --primary: #6d28d9;
+  --primary-foreground: #ffffff;
+  --accent: #1d4ed8;
   --muted: #475569;
-  --border: rgba(99, 102, 241, 0.15); /* Subtle indigo border */
-  --card: rgba(255, 255, 255, 0.7); /* Translucent white for glass effect */
+  --border: #cbd5e1;
+  --card: #ffffff;
 }
 
 :root[data-theme="dark"] {
@@ -42,6 +44,7 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
   --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted);
   --color-border: var(--border);
   --color-card: var(--card);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
@@ -67,9 +70,7 @@ body {
 }
 
 .section-container {
-  max-width: 72rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  max-width: 100rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 3vw, 3rem);
 }

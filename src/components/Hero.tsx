@@ -29,7 +29,6 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-heading text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl"
           >
-            I'm{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {profile.name}
             </span>
@@ -39,18 +38,18 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="font-heading text-xl font-medium text-muted-foreground sm:text-3xl"
+            className="font-heading text-xl font-medium text-muted sm:text-3xl"
           >
-            {profile.tagline}
+            {profile.role} at the University of Moratuwa
           </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-xl text-lg text-muted-foreground/80 leading-relaxed"
+            className="max-w-xl text-lg text-muted leading-relaxed"
           >
-            {profile.summary}
+            Currently seeking a software engineering internship where I can contribute to building and maintaining full-stack applications.
           </motion.p>
 
           <motion.div
@@ -92,11 +91,11 @@ export default function Hero() {
             href="#about"
             aria-label="Scroll to about section"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, y: [0, 4, 0] }}
-            transition={{ opacity: { delay: 0.8 }, y: { duration: 2.4, repeat: Infinity, ease: "easeInOut" } }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
             className="mt-8 flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors w-fit"
           >
-            <ArrowDown size={16} className="animate-bounce" />
+            <ArrowDown size={16} />
             Discover more
           </motion.a>
         </div>
@@ -106,7 +105,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative order-first mx-auto w-full max-w-xs md:order-last md:max-w-md group"
+          className="relative mx-auto w-full max-w-xs md:max-w-md group"
         >
           <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-primary/30 to-accent/30 opacity-50 blur-2xl transition duration-500 group-hover:opacity-100 group-hover:blur-3xl" />
           <div className="relative aspect-square w-full overflow-hidden rounded-full border-2 border-primary/20 shadow-2xl bg-card">

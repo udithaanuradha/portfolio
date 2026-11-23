@@ -6,7 +6,7 @@ export default function SectionHeading({
   eyebrow,
   title,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
 }) {
   return (
@@ -17,9 +17,11 @@ export default function SectionHeading({
       transition={{ duration: 0.5 }}
       className="mb-10"
     >
-      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-        {eyebrow}
-      </p>
+      {eyebrow && (
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+          {eyebrow}
+        </p>
+      )}
       <h2 className="font-heading text-3xl font-semibold sm:text-4xl">{title}</h2>
     </motion.div>
   );

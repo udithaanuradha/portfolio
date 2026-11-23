@@ -1,0 +1,117 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, #201541, transparent 65%), #030712;
+  --exit-delay: 5s;
+  animation: curtain 650ms cubic-bezier(0.76, 0, 0.24, 1) var(--exit-delay) both;
+}
+
+.intro[data-revealing="true"] {
+  --exit-delay: 150ms;
+  animation-name: reveal-page;
+}
+
+.mark {
+  display: grid;
+  justify-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.intro[data-revealing="true"] .mark {
+  animation: clear-mark 350ms ease-in both;
+}
+
+.name {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 8vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  color: #f8fafc;
+  background: linear-gradient(110deg, #f8fafc 20%, #c4b5fd 60%, #93c5fd);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: reveal-name 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.loading {
+  display: grid;
+  justify-items: center;
+  gap: 0.625rem;
+  color: #cbd5e1;
+  font-size: 0.75rem;
+  animation: show-loading 400ms ease-out 350ms both;
+}
+
+.track {
+  width: min(11rem, 50vw);
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #ffffff24;
+}
+
+.indicator {
+  display: block;
+  width: 45%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a78bfa, #60a5fa);
+  animation: sweep 1s ease-in-out infinite alternate;
+}
+
+@keyframes reveal-name {
+  from {
+    opacity: 0;
+    transform: translateY(0.3em);
+    clip-path: inset(0 0 100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0);
+  }
+}
+
+@keyframes show-loading {
+  from { opacity: 0; }
+}
+
+@keyframes sweep {
+  from { transform: translateX(0); }
+  to { transform: translateX(122%); }
+}
+
+@keyframes clear-mark {
+  to { opacity: 0; }
+}
+
+@keyframes curtain {
+  to { visibility: hidden; }
+}
+
+@keyframes reveal-page {
+  from { clip-path: inset(0); }
+  to {
+    clip-path: inset(0 0 100%);
+    visibility: hidden;
+  }
+}
+
+.intro[data-skipped="true"],
+:global(body:has(main section:target)) .intro,
+:global(body:focus-within) .intro {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+  }
+}

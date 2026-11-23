@@ -1,85 +1,80 @@
-"use client";
-
-import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
-import { projects } from "@/data/portfolio";
+import { projects, type Project } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
-import Carousel from "./Carousel";
 
 export default function Projects() {
   return (
-    <section id="projects" className="section-container py-24">
-      <SectionHeading eyebrow="Projects" title="Things I've built" />
+    <section id="projects" className="section-container scroll-mt-20 py-24">
+      <SectionHeading title="Projects" />
 
-      <Carousel>
-        {projects.map((project, i) => (
-          <motion.div
-            key={project.title}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
-            whileHover={{ y: -4, scale: 1.01 }}
-            className="flex flex-col justify-between rounded-xl border border-border/50 bg-card/40 backdrop-blur-md p-6 shadow-sm transition-all hover:border-primary/50 hover:shadow-primary/20 hover:shadow-xl hover:bg-card/60 h-full"
-          >
-            <div>
-              <h3 className="mb-2 text-lg font-semibold">
-                {/* If a case study exists, the title itself links to it */}
-                {project.caseStudy ? (
+      <ProjectGrid items={projects.slice(0, 4)} />
+
+      <div className="mt-8 flex justify-center">
+        <Link href="/projects" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-3 font-semibold transition-colors hover:border-accent hover:text-accent">
+          View all projects <ArrowRight size={16} aria-hidden="true" />
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+export function ProjectGrid({ items, heading: Heading = "h3" }: { items: Project[]; heading?: "h2" | "h3" }) {
+  return (
+    <div className="grid gap-6 lg:grid-cols-2">
+      {items.map((project) => {
+        const preview = project.caseStudy?.screenshotGroups?.[0]?.images[0];
+
+        return (
+          <article key={project.title} className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-primary/50">
+            {preview && (
+              <div className="relative aspect-video max-h-72 border-b border-border bg-background">
+                <Image src={preview.src} alt={preview.alt} fill sizes="(min-width: 1024px) 46vw, 94vw" className="object-contain" />
+              </div>
+            )}
+
+            <div className="flex flex-1 flex-col p-6 sm:p-8">
+              {project.client && (
+                <p className="mb-2 text-sm font-medium text-accent">{project.client}</p>
+              )}
+              <Heading className="mb-3 text-pretty font-heading text-2xl font-semibold sm:text-3xl">{project.title}</Heading>
+              <p className="mb-5 max-w-prose leading-relaxed text-muted">{project.description}</p>
+
+              <ul aria-label="Technologies" className="mb-6 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <li key={tag} className="rounded-md border border-border px-2.5 py-1 font-mono text-xs text-muted">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-border pt-5 text-sm">
+                {project.caseStudy && (
                   <Link
                     href={`/projects/${project.caseStudy.slug}`}
-                    className="hover:text-accent"
+                    aria-label={`View case study: ${project.title}`}
+                    className="inline-flex items-center gap-2 rounded-lg bg-primary/10 px-3 py-2 font-semibold text-foreground transition-colors hover:bg-primary/20"
                   >
-                    {project.title}
+                    View case study <ArrowRight size={16} aria-hidden="true" />
                   </Link>
-                ) : (
-                  project.title
                 )}
-              </h3>
-              <p className="mb-4 text-sm text-muted">{project.description}</p>
-              <div className="mb-6 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-md border border-border px-3 py-1 font-mono text-xs text-muted"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                {project.githubUrl && (
+                  <a href={project.githubUrl} className="inline-flex items-center gap-2 text-muted hover:text-foreground">
+                    <FaGithub size={16} aria-hidden="true" /> Code
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a href={project.liveUrl} className="inline-flex items-center gap-2 text-muted hover:text-foreground">
+                    <ExternalLink size={16} aria-hidden="true" /> Live demo
+                  </a>
+                )}
               </div>
             </div>
-
-            <div className="flex flex-wrap gap-4 text-sm">
-              {project.caseStudy && (
-                <Link
-                  href={`/projects/${project.caseStudy.slug}`}
-                  className="flex items-center gap-1.5 font-medium text-accent hover:opacity-80"
-                >
-                  Case study <ArrowRight size={16} />
-                </Link>
-              )}
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  className="flex items-center gap-1.5 text-muted hover:text-foreground"
-                >
-                  <FaGithub size={16} /> Code
-                </a>
-              )}
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  className="flex items-center gap-1.5 text-muted hover:text-foreground"
-                >
-                  <ExternalLink size={16} /> Live demo
-                </a>
-              )}
-            </div>
-          </motion.div>
-        ))}
-      </Carousel>
-    </section>
+          </article>
+        );
+      })}
+    </div>
   );
 }

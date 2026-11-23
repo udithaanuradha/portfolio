@@ -7,6 +7,11 @@ import { profile } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
 
 export default function Contact() {
+  const internshipStart = new Intl.DateTimeFormat("en-US", {
+    dateStyle: "long",
+    timeZone: "UTC",
+  }).format(new Date(profile.internshipStartDate));
+
   return (
     <section id="contact" className="section-container py-24">
       <SectionHeading eyebrow="Contact" title="Let's work together" />
@@ -19,9 +24,11 @@ export default function Contact() {
         className="rounded-xl border border-border bg-card p-8 shadow-sm"
       >
         <p className="mb-6 max-w-lg text-muted">
-          I&apos;m open to internships, entry-level roles, and interesting
-          collaborations. The fastest way to reach me is email — feel free to
-          say hi.
+          I&apos;m available for software engineering internships starting{" "}
+          <time dateTime={profile.internshipStartDate}>{internshipStart}</time>.
+        </p>
+        <p className="mb-6 max-w-lg text-muted">
+          Email is the fastest way to reach me.
           {/* Swap this section for a real form (e.g. Formspree, Web3Forms,
              or a Next.js Server Action + Resend) once you're ready — no
              database needed either way. */}

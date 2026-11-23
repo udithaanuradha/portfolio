@@ -8,19 +8,19 @@ import { Code2, Database, LayoutTemplate, Wrench, Cloud, Server } from "lucide-r
 const getCategoryIcon = (category: string) => {
   switch (category) {
     case "Languages":
-      return <Code2 className="h-6 w-6 text-blue-400" />;
+      return <Code2 className="h-6 w-6 text-blue-400 light:text-blue-700" />;
     case "Web and Mobile":
-      return <LayoutTemplate className="h-6 w-6 text-emerald-400" />;
+      return <LayoutTemplate className="h-6 w-6 text-emerald-400 light:text-emerald-700" />;
     case "Back-End and APIs":
-      return <Server className="h-6 w-6 text-amber-400" />;
+      return <Server className="h-6 w-6 text-amber-400 light:text-amber-800" />;
     case "Databases and ORMs":
-      return <Database className="h-6 w-6 text-purple-400" />;
+      return <Database className="h-6 w-6 text-purple-400 light:text-purple-700" />;
     case "DevOps and Cloud":
-      return <Cloud className="h-6 w-6 text-cyan-400" />;
+      return <Cloud className="h-6 w-6 text-cyan-400 light:text-cyan-700" />;
     case "Tools":
-      return <Wrench className="h-6 w-6 text-gray-400" />;
+      return <Wrench className="h-6 w-6 text-gray-400 light:text-slate-700" />;
     default:
-      return <Code2 className="h-6 w-6 text-blue-400" />;
+      return <Code2 className="h-6 w-6 text-blue-400 light:text-blue-700" />;
   }
 };
 
@@ -46,7 +46,7 @@ export default function Skills() {
             {/* Card Content without the neon purple glow */}
             <div className="relative h-full bg-card/40 backdrop-blur-md border border-border/40 rounded-2xl p-6 sm:p-8 flex flex-col hover:bg-card/60 hover:border-border transition-all duration-300">
               <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-muted/50 rounded-xl ring-1 ring-border/50 shadow-inner">
+                <div className="p-3 bg-muted/50 light:bg-background rounded-xl ring-1 ring-border/50 shadow-inner">
                   {getCategoryIcon(categoryGroup.category)}
                 </div>
                 <h3 className="text-xl font-semibold text-foreground tracking-tight">
@@ -63,7 +63,7 @@ export default function Skills() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.1 + (i * 0.05) }}
                     whileHover={{ scale: 1.05, y: -2 }}
-                    className="relative overflow-hidden rounded-lg border border-border/30 bg-background/30 hover:bg-muted/60 px-4 py-2 transition-all duration-300 cursor-default shadow-sm"
+                    className="relative overflow-hidden rounded-lg border border-border/30 bg-background/30 hover:bg-muted/60 light:hover:bg-accent/10 px-4 py-2 transition-all duration-300 cursor-default shadow-sm"
                   >
                     <span className="relative z-10 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                       {skill}

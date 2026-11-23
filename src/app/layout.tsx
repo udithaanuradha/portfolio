@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { profile } from "@/data/portfolio";
-import IntroLoader from "@/components/IntroLoader";
 import SpaceBackground from "@/components/SpaceBackground";
 import CustomCursor from "@/components/CustomCursor";
 
 // Inter for body text, Outfit for headings — a sleek, modern pairing for
 // a high-tech, premium feel. Exposed as CSS variables and wired into 
 // --font-sans / --font-heading in globals.css.
-const inter = Inter({
-  subsets: ["latin"],
+const inter = localFont({
+  src: "./fonts/inter.ttf",
+  weight: "100 900",
   variable: "--font-inter",
   display: "swap",
 });
-const outfit = Outfit({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+const outfit = localFont({
+  src: "./fonts/outfit.ttf",
+  weight: "100 900",
   variable: "--font-outfit",
   display: "swap",
 });
@@ -26,7 +26,7 @@ const outfit = Outfit({
 const siteUrl = "https://udithaanuradha.com"; // Placeholder updated
 
 const title = `${profile.name} — ${profile.role}`;
-const description = `Portfolio of ${profile.name}, ${profile.role.toLowerCase()} showcasing projects, skills, and achievements.`;
+const description = `Explore the projects, skills, and writing of ${profile.name}, an IT undergraduate at the University of Moratuwa.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -68,7 +68,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col relative bg-transparent">
         <CustomCursor />
         <SpaceBackground />
-        <IntroLoader />
         {children}
       </body>
     </html>

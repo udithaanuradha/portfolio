@@ -31,9 +31,8 @@ export default function About() {
             deployment.
           </p>
           <p>
-            I&apos;m looking for internship or junior developer roles where I
-            can keep working across the stack and learn from experienced
-            engineers.
+            I&apos;m looking for software engineering internships or junior roles
+            where I can contribute to a team and learn from experienced engineers.
           </p>
         </div>
 

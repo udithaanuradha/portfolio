@@ -1,4 +1,4 @@
-import { getArticleBySlug, articles } from "@/data/portfolio";
+import { getArticleBySlug, articles, profile } from "@/data/portfolio";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -10,8 +10,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  const article = getArticleBySlug(params.slug);
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
 
   if (!article) {
     notFound();
@@ -23,7 +24,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
         href="/#articles"
         className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-8"
       >
-        <ArrowLeft size={16} /> Back to Articles
+        <ArrowLeft size={16} /> Back to writing
       </Link>
 
       <article>
@@ -46,9 +47,11 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
               ) : (
                 <FaLinkedin className="text-blue-500" size={16} />
               )}
-              Originally published on {article.platform}
+              {article.url ? "Originally published on" : "Post summary from"} {article.platform}
             </span>
-            <span className="text-sm text-muted-foreground font-mono">{article.date}</span>
+            {article.date && (
+              <span className="text-sm text-muted-foreground font-mono">{article.date}</span>
+            )}
           </div>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
             {article.title}
@@ -68,15 +71,15 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
           ))}
         </div>
 
-        {article.url && article.url !== "#" && (
+        {(article.url || article.platform === "LinkedIn") && (
           <div className="mt-16 pt-8 border-t border-border">
             <a 
-              href={article.url}
+              href={article.url ?? profile.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
             >
-              Read Original Post on {article.platform}
+              {article.url ? `Read original post on ${article.platform}` : "View LinkedIn profile"}
             </a>
           </div>
         )}

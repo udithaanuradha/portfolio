@@ -8,11 +8,10 @@ import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
-  { href: "#articles", label: "Articles" },
+  { href: "#articles", label: "Writing" },
+  { href: "#experience", label: "Education" },
   { href: "#skills", label: "Skills" },
-  { href: "#awards", label: "Certifications" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -59,6 +58,7 @@ export default function Navbar() {
             onClick={() => setOpen((v) => !v)}
             className="text-foreground md:hidden"
             aria-label="Toggle menu"
+            aria-expanded={open}
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>

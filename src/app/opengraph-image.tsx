@@ -44,7 +44,7 @@ export default async function Image() {
           {profile.name}
         </div>
         <div style={{ display: "flex", fontSize: 30, color: colors.muted, maxWidth: 900 }}>
-          {profile.tagline}
+          {profile.role}
         </div>
       </div>
     ),

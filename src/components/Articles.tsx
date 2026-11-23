@@ -1,69 +1,70 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { ExternalLink, BookOpen } from "lucide-react";
-import { FaMedium, FaLinkedin } from "react-icons/fa";
-import { articles } from "@/data/portfolio";
-import SectionHeading from "./SectionHeading";
-import Carousel from "./Carousel";
+import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, ExternalLink } from "lucide-react";
+import { articles, linkedInArticles } from "@/data/portfolio";
+import SectionHeading from "./SectionHeading";
 
 export default function Articles() {
-  // Hide section completely if there are no articles
-  if (!articles || articles.length === 0) return null;
+  return (
+    <section id="articles" className="section-container scroll-mt-20 pb-24">
+      <div className="border-t border-border pt-12">
+        <SectionHeading title="Writing" />
+        <ArticleGrid limit={4} />
+
+        <div className="mt-8 flex justify-center">
+          <Link href="/articles" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-3 font-semibold transition-colors hover:border-accent hover:text-accent">
+            View all writing <ArrowRight size={16} aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ArticleGrid({ limit, heading: Heading = "h3" }: { limit?: number; heading?: "h2" | "h3" }) {
+  const entries = [
+    ...articles.map((article) => ({
+      ...article,
+      href: `/articles/${article.slug}`,
+      external: false,
+    })),
+    ...linkedInArticles.map((article) => ({
+      ...article,
+      href: article.url,
+      platform: "LinkedIn",
+      date: undefined,
+      imageUrl: undefined,
+      external: true,
+    })),
+  ].slice(0, limit);
+
+  if (entries.length === 0) {
+    return <p className="text-muted">New writing will appear here.</p>;
+  }
 
   return (
-    <section id="articles" className="section-container py-24">
-      <SectionHeading eyebrow="Publications" title="Articles & Writing" />
-
-      <Carousel>
-        {articles.map((article, i) => (
-          <motion.div
-            key={article.title}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            whileHover={{ y: -4, scale: 1.01 }}
-            className="group relative flex flex-col justify-between rounded-xl border border-border/50 bg-card/40 backdrop-blur-md p-6 shadow-sm transition-all hover:border-primary/50 hover:shadow-primary/20 hover:shadow-xl hover:bg-card/60 h-full"
-          >
-            {article.imageUrl && (
-              <div className="w-full h-40 mb-4 overflow-hidden rounded-lg bg-muted/20">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src={article.imageUrl} 
-                  alt={article.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-            )}
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="flex items-center gap-2 text-xs font-medium text-muted-foreground bg-muted/30 px-3 py-1 rounded-full">
-                  {article.platform === "Medium" ? (
-                    <FaMedium className="text-foreground" size={14} />
-                  ) : (
-                    <FaLinkedin className="text-blue-500" size={14} />
-                  )}
-                  {article.platform}
-                </span>
-                <span className="text-xs text-muted-foreground font-mono">{article.date}</span>
-              </div>
-              
-              <h3 className="mb-3 text-xl font-semibold leading-tight group-hover:text-primary transition-colors">
-                <Link href={`/articles/${article.slug}`}>
-                  {article.title}
-                  <span className="absolute inset-0"></span>
-                </Link>
-              </h3>
-              
-              <p className="text-sm text-muted-foreground line-clamp-3">
-                {article.description}
-              </p>
+    <div className="grid gap-4 lg:grid-cols-2">
+      {entries.map(({ title, description, href, date, platform, imageUrl, external }) => (
+        <article key={href} className="relative flex min-w-0 items-start gap-4 rounded-2xl border border-border bg-card p-4 transition-colors hover:border-primary/50 sm:gap-5 sm:p-5">
+          {imageUrl && (
+            <div className="relative aspect-square w-16 shrink-0 overflow-hidden rounded-lg bg-background sm:w-24">
+              <Image src={imageUrl} alt="" fill sizes="(min-width: 640px) 96px, 64px" className="object-contain" />
             </div>
-          </motion.div>
-        ))}
-      </Carousel>
-    </section>
+          )}
+          <div className="min-w-0">
+            <p className="mb-1 text-xs font-medium text-muted">{date ? `${platform} · ${date}` : platform}</p>
+            <Heading className="text-pretty font-heading text-lg font-semibold leading-snug sm:text-xl">
+              <Link href={href} className="after:absolute after:inset-0 after:rounded-2xl hover:text-accent focus-visible:after:ring-2 focus-visible:after:ring-inset focus-visible:after:ring-accent">
+                {title}
+                {external
+                  ? <ExternalLink className="ml-2 inline text-accent" size={15} aria-hidden="true" />
+                  : <ArrowRight className="ml-2 inline text-accent" size={15} aria-hidden="true" />}
+              </Link>
+            </Heading>
+            <p className="mt-2 text-sm leading-relaxed text-muted">{description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
   );
 }

@@ -8,7 +8,7 @@ import SectionHeading from "./SectionHeading";
 export default function Experience() {
   return (
     <section id="experience" className="section-container py-24">
-      <SectionHeading eyebrow="Experience & Education" title="Where I've been" />
+      <SectionHeading title="Education" />
 
       {/* Vertical line the dots sit on, positioned to line up with each icon */}
       <div className="relative space-y-8 border-l border-border pl-8">
